@@ -3,7 +3,7 @@ package com.shui520it.access.funcion.service
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.view.accessibility.AccessibilityEvent
-import com.shui520it.access.funcion.pool.ShuiRunnableImpl02
+import com.shui520it.access.funcion.pool.ShuiRunnableImpl
 import com.shui520it.access.funcion.pool.ShuiThreadPool
 
 /**
@@ -31,7 +31,7 @@ class ShuiService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         when (event?.eventType) {
             AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED -> {
-                ShuiThreadPool.execute(ShuiRunnableImpl02(this))
+                ShuiThreadPool.execute(ShuiRunnableImpl(this))
             }
         }
     }

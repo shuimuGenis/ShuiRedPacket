@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference
  * @time 2019/8/14  11:59
  * @desc
  */
-class ShuiRunnableImpl02 : Runnable {
+class ShuiRunnableImpl : Runnable {
     private val serviceReference: WeakReference<AccessibilityService>
 
     constructor(service: AccessibilityService) {
