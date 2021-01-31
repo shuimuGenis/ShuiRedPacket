@@ -57,11 +57,11 @@ public class ShuiRunnableImpl implements Runnable {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             boolean mainPager = isMainPager();
             if (mainPager) {
-                ShuiThreadPool.get().mRunnable = true;
+                ShuiThreadPool.INSTANCE.setRunnable(true);
                 return;
             }
             try {
-                Thread.sleep(250);
+                Thread.sleep(180);
                 AccessibilityService service = serviceReference.get();
                 if (service == null) {
                     return;
@@ -71,7 +71,7 @@ public class ShuiRunnableImpl implements Runnable {
                     AccessibilityNodeInfo root = ((AccessibilityWindowInfo) window).getRoot();
                     boolean alreadyInRedKeyResultPager = isAlreadyInRedKeyResultPager(root);
                     if (alreadyInRedKeyResultPager) {
-                        ShuiThreadPool.get().mRunnable = true;
+                        ShuiThreadPool.INSTANCE.setRunnable(true);
                         return;
                     }
                     if (root != null && !isAlreadyInRedKeyDetailPager(root)) {
@@ -118,7 +118,7 @@ public class ShuiRunnableImpl implements Runnable {
                 e.printStackTrace();
             }
         }
-        ShuiThreadPool.get().mRunnable = true;
+        ShuiThreadPool.INSTANCE.setRunnable(true);
     }
 
 
