@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * 需要声明的权限
          */
-        val BASE_PERMISSIONS: Array<String> = arrayOf(Manifest.permission.ACCESS_NETWORK_STATE,
+        internal  val BASE_PERMISSIONS: Array<String> = arrayOf(Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.INTERNET,
                 Manifest.permission.WAKE_LOCK,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -79,6 +79,6 @@ class MainActivity : AppCompatActivity() {
         /**
          * 请求情绪的requestCode
          */
-        val BASE_PERMISSION_ONE_REQUEST = 0x1011
+        internal  val BASE_PERMISSION_ONE_REQUEST = 0x1011
     }
 }

@@ -24,9 +24,14 @@ object ShuiThreadPool {
     /**
      * 加上线程安全
      */
-    @Synchronized
     fun execute(run: Runnable) {
-        executorService?.execute(run)
+        synchronized(ShuiThreadPool) {
+            if (runnable) {
+                runnable = false
+                executorService?.execute(run)
+            }
+        }
+
     }
 
     fun shutdown() {
