@@ -9,21 +9,40 @@ android {
     }
 
     // 签名配置
-    signingConfigs {
-        //加载签名文件
-        release {
-            keyAlias "${properties.APP_KEY_ALIAS}"
-            keyPassword "${properties.APP_KEY_PWD}"
-            storePassword "${properties.APP_KEY_STORE_PWD}"
-            storeFile file("/src/config/shui.jks")
-            v2SigningEnabled true
+    if (properties != null) {
+        signingConfigs {
+            //加载签名文件
+            release {
+                keyAlias "${properties.APP_KEY_ALIAS}"
+                keyPassword "${properties.APP_KEY_PWD}"
+                storePassword "${properties.APP_KEY_STORE_PWD}"
+                storeFile file("/src/config/shui.jks")
+                v2SigningEnabled true
+            }
+            debug {
+                keyAlias "${properties.APP_KEY_ALIAS}"
+                keyPassword "${properties.APP_KEY_PWD}"
+                storePassword "${properties.APP_KEY_STORE_PWD}"
+                storeFile file("/src/config/shui.jks")
+                v2SigningEnabled true
+            }
         }
-        debug {
-            keyAlias "${properties.APP_KEY_ALIAS}"
-            keyPassword "${properties.APP_KEY_PWD}"
-            storePassword "${properties.APP_KEY_STORE_PWD}"
-            storeFile file("/src/config/shui.jks")
-            v2SigningEnabled true
+    }
+
+    buildTypes {
+        release {
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            if (properties != null) {
+                //签名
+                signingConfig signingConfigs.release
+            }
+            //混淆
+            minifyEnabled true
+            //混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     android.applicationVariants.all {
@@ -41,6 +60,8 @@ android {
  */
 Properties loadProperties() {
     def propertiesFile = file("/src/config/config.properties")
+    def configExists = propertiesFile.exists()
+    if (!configExists) return null
     Properties properties = new Properties()
     propertiesFile.withInputStream { stream ->
         properties.load(stream)
