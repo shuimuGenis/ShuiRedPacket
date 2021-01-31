@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ShuiRedketDemo</string>
+    <string name="main_btn_startup">一切的开始</string>
+    <string name="main_tip_statement">声明：该Demo以来的是Android内置的无障碍辅助服务，只有在无障碍辅助服务下，开启了ShuiRedket功能后，才能使用</string>
+    <string name="service_statement">声明：开启无障碍服务,以便ShuiReket APP能够正常运行</string>
+    <string name="service_init">ShuiRedKet 功能服务启动</string>
+    <string name="version">版本：%1$s</string>
+</resources>

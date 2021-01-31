@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_06">
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_60"
+        android:text="@string/main_tip_statement"
+        android:textSize="@dimen/dimen_18" />
+
+    <Button
+        android:id="@+id/starUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tips"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:onClick="openAccessibilitySettings"
+        android:text="@string/main_btn_startup" />
+
+    <TextView
+
+        android:id="@+id/versionCodeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/starUp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dimen_200"
+        android:layout_marginRight="@dimen/dimen_03"
+        android:text="版本" />
+
+</RelativeLayout>

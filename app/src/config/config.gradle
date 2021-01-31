@@ -1,0 +1,53 @@
+android {
+    def properties = loadProperties()
+    // 移除lint检测的error，执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
+
+    // 签名配置
+    signingConfigs {
+        //加载签名文件
+        release {
+            keyAlias "${properties.APP_KEY_ALIAS}"
+            keyPassword "${properties.APP_KEY_PWD}"
+            storePassword "${properties.APP_KEY_STORE_PWD}"
+            storeFile file("/src/config/shui.jks")
+            v2SigningEnabled true
+        }
+        debug {
+            keyAlias "${properties.APP_KEY_ALIAS}"
+            keyPassword "${properties.APP_KEY_PWD}"
+            storePassword "${properties.APP_KEY_STORE_PWD}"
+            storeFile file("/src/config/shui.jks")
+            v2SigningEnabled true
+        }
+    }
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "ShuiRedKet-v${variant.versionName}-${apkTime()}.apk"
+            }
+    }
+}
+
+
+/**
+ * 获取config的配置内容
+ * @return
+ */
+Properties loadProperties() {
+    def propertiesFile = file("/src/config/config.properties")
+    Properties properties = new Properties()
+    propertiesFile.withInputStream { stream ->
+        properties.load(stream)
+    }
+    return properties
+}
+
+def apkTime() {
+    return new Date().format("yyyyMddHHmmss", TimeZone.getDefault())
+}

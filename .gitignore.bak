@@ -1,0 +1,16 @@
+*.iml
+*.bat
+*.apk
+*.zip
+*.properties
+*.hprof
+/captures
+~$*
+gradlew
+.DS_Store
+.idea
+.gradle
+gradle
+gradlew
+gradlew.bat
+build
