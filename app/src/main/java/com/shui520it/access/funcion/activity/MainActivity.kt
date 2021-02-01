@@ -45,10 +45,9 @@ class MainActivity : AppCompatActivity() {
         //对需要的权限进行判断，是否存在没有授权的权限
         BASE_PERMISSIONS
                 .filter { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
-                .takeIf { it.isNotEmpty() }?.toTypedArray()
-                .apply {
+                .takeIf { it.isNotEmpty() }?.toTypedArray()?.apply {
                     //对没有授权的权限进行请求
-                    ActivityCompat.requestPermissions(this@MainActivity, this!!, BASE_PERMISSION_ONE_REQUEST)
+                    ActivityCompat.requestPermissions(this@MainActivity, this, BASE_PERMISSION_ONE_REQUEST)
                 }
     }
 
@@ -71,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * 需要声明的权限
          */
-        internal  val BASE_PERMISSIONS: Array<String> = arrayOf(Manifest.permission.ACCESS_NETWORK_STATE,
+        internal val BASE_PERMISSIONS: Array<String> = arrayOf(Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.INTERNET,
                 Manifest.permission.WAKE_LOCK,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -79,6 +78,6 @@ class MainActivity : AppCompatActivity() {
         /**
          * 请求情绪的requestCode
          */
-        internal  val BASE_PERMISSION_ONE_REQUEST = 0x1011
+        internal val BASE_PERMISSION_ONE_REQUEST = 0x1011
     }
 }
