@@ -11,12 +11,8 @@ import java.lang.ref.WeakReference
  * @time 2019/8/14  11:59
  * @desc
  */
-class ShuiRunnableImpl : Runnable {
-    private val serviceReference: WeakReference<AccessibilityService>
-
-    constructor(service: AccessibilityService) {
-        serviceReference = WeakReference(service)
-    }
+class ShuiRunnableImpl(service: AccessibilityService) : Runnable {
+    private val serviceReference: WeakReference<AccessibilityService> = WeakReference(service)
 
     override fun run() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -28,8 +24,7 @@ class ShuiRunnableImpl : Runnable {
                 Thread.sleep(180)
                 serviceReference.get()?.windows?.forEach {
                     if (isAlreadyInRedKeyResultPager(it.root)) {
-                        ShuiThreadPool.runnable = true
-                        return
+                        return@forEach
                     }
                     it.root?.takeIf { rootIt -> !isAlreadyInRedKeyDetailPager(rootIt) }?.findAccessibilityNodeInfosByViewId(CHAT_OPEN_REDView_ID)?.forEach constituting@{ ait ->
                         if (ait.childCount > 1) {
@@ -55,7 +50,7 @@ class ShuiRunnableImpl : Runnable {
                                 child.recycle()
                                 ait?.recycle()
                                 return@forEach
-                            }else
+                            } else
                                 println(">>>>>>>>>>已被领取>>继续查找未领取的红包")
                         }
                         ait?.recycle()
@@ -123,22 +118,27 @@ class ShuiRunnableImpl : Runnable {
          * 红包所在容器
          */
         internal val CHAT_OPEN_REDView_ID = "com.tencent.mm:id/auf"
+
         /**
          * 红包“开”按钮的ViewID
          */
         internal val CHAT_OPEN_REDKEY_ID = "com.tencent.mm:id/f4f"
+
         /**
          * "已领取"的控件ID
          */
         internal val CHAT_OPEN_RECEIVED_ID = "com.tencent.mm:id/tt"
+
         /**
          * 每个微信红包都有一个叫"微信红包"的 小文字 显示,我们根据这个来判断确实是微信红包
          */
         internal val CHAT_WX_HONGBAO_FLAG_ID = "com.tencent.mm:id/u5"
+
         /**
          * 微信主页的ID
          */
         internal val CHAT_MAIN_ID = "com.tencent.mm:id/g8f"
+
         /**
          * 判断是否进入了 查看红包金额的界面了
          * 条件一CHAT_REDKEY_RESULT_ID 条件二CHAT_REDKEY_RESULT_TEXT

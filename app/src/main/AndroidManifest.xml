@@ -18,9 +18,11 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--                <category android:name="android.intent.category.LAUNCHER"/>
+        移除 category标签，在页面上将不会显示APP图标,同时配置 Run->Edit Configuration 即可安装无桌面图标APP
+-->
         <!-- 声明的无障碍辅助服务。该服务按照如下进行配置,否则无效   -->
         <service
             android:name=".service.ShuiService"
