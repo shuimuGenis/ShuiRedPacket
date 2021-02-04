@@ -21,7 +21,7 @@ class ShuiRunnableImpl(service: AccessibilityService) : Runnable {
                 return
             }
             try {
-                Thread.sleep(180)
+                Thread.sleep(100)
                 serviceReference.get()?.windows?.forEach {
                     if (isAlreadyInRedKeyResultPager(it.root)) {
                         return@forEach
