@@ -10,6 +10,7 @@ import java.util.concurrent.Executors
  */
 object ShuiThreadPool {
     var runnable = true
+
     /**
      * 一个线程的线程池
      */

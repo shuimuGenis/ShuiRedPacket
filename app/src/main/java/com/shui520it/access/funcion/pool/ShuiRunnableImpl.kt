@@ -13,8 +13,10 @@ import java.lang.ref.WeakReference
  */
 class ShuiRunnableImpl(service: AccessibilityService) : Runnable {
     private val serviceReference: WeakReference<AccessibilityService> = WeakReference(service)
+    private val mapId: HashMap<String, String> = hashMapOf()
 
     override fun run() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (isMainPager()) {
                 ShuiThreadPool.runnable = true
@@ -62,6 +64,18 @@ class ShuiRunnableImpl(service: AccessibilityService) : Runnable {
             }
         }
         ShuiThreadPool.runnable = true
+    }
+
+    /**
+     * 安装应用后第一次启动服务时,对第一个红包进行ID收集
+     * 收集之后缓存本地,
+     */
+    fun collectionAllIDLogic() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            serviceReference.get()?.windows?.forEach {
+                it.childCount
+            }
+        }
     }
 
     /**

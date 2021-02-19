@@ -2,7 +2,6 @@ package com.shui520it.access.funcion.action
 
 import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
-import androidx.annotation.RequiresApi
 
 /**
  * @author shuimu{lwp}
@@ -12,9 +11,9 @@ import androidx.annotation.RequiresApi
 class ShuiIdActionImpl : ShuiBaseAction<String>() {
 
     override fun findFirst(info: AccessibilityNodeInfo): AccessibilityNodeInfo? =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) info.findAccessibilityNodeInfosByViewId(acitonKey)?.takeIf { it.isNotEmpty() }?.first() else null
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) info.findAccessibilityNodeInfosByViewId(actionKey)?.takeIf { it.isNotEmpty() }?.first() else null
 
     override fun findAll(info: AccessibilityNodeInfo): List<AccessibilityNodeInfo>? =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) info.findAccessibilityNodeInfosByViewId(acitonKey) else null
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) info.findAccessibilityNodeInfosByViewId(actionKey) else null
 
 }
