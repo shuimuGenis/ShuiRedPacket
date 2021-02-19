@@ -14,12 +14,8 @@ object ShuiThreadPool {
     /**
      * 一个线程的线程池
      */
-    private var executorService: ExecutorService? = null
-
-    fun init() {
-        if (executorService == null) {
-            executorService = Executors.newSingleThreadExecutor()
-        }
+    private val executorService: ExecutorService by lazy {
+        Executors.newSingleThreadExecutor()
     }
 
     /**
@@ -29,16 +25,12 @@ object ShuiThreadPool {
         synchronized(ShuiThreadPool) {
             if (runnable) {
                 runnable = false
-                executorService?.execute(run)
+                executorService.execute(run)
             }
         }
-
     }
 
     fun shutdown() {
-        executorService?.apply {
-            shutdown()
-        }
-        executorService = null
+        executorService.shutdown()
     }
 }

@@ -28,6 +28,7 @@
             android:name=".service.ShuiService"
             android:directBootAware="true"
             android:enabled="true"
+            android:process=":remote"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>

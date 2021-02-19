@@ -16,12 +16,12 @@ class ShuiRunnableImpl(service: AccessibilityService) : Runnable {
     private val mapId: HashMap<String, String> = hashMapOf()
 
     override fun run() {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (isMainPager()) {
                 ShuiThreadPool.runnable = true
                 return
             }
+            collectionAllIDLogic()
             try {
                 Thread.sleep(100)
                 serviceReference.get()?.windows?.forEach {
@@ -73,7 +73,7 @@ class ShuiRunnableImpl(service: AccessibilityService) : Runnable {
     fun collectionAllIDLogic() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             serviceReference.get()?.windows?.forEach {
-                it.childCount
+
             }
         }
     }

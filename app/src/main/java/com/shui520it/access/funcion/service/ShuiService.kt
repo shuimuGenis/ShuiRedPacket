@@ -14,13 +14,12 @@ import com.shui520it.access.funcion.pool.ShuiThreadPool
 class ShuiService : AccessibilityService() {
     override fun onCreate() {
         super.onCreate()
+        ShuiThreadPool.runnable
         println(">>>>>>>>>>服务被启动了 onCreate")
-        ShuiThreadPool.init()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         println(">>>>>>>>>>服务被启动了 onStartCommand")
-        ShuiThreadPool.init()
         return super.onStartCommand(intent, flags, startId)
     }
 
