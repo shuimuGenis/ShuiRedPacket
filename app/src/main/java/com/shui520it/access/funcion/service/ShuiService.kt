@@ -30,7 +30,10 @@ class ShuiService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         when (event?.eventType) {
             AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED -> {
-                ShuiThreadPool.execute(ShuiRunnableImpl(this))
+                //加个判断避免重复传教Runnable。
+                if (ShuiThreadPool.runnable) {
+                    ShuiThreadPool.execute(ShuiRunnableImpl(this))
+                }
             }
         }
     }
