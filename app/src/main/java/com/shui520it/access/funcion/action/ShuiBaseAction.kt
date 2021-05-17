@@ -16,7 +16,7 @@ abstract class ShuiBaseAction<T> {
     /**
      * 处理的数据
      */
-   open var actionKey: T? = null
+    open var actionKey: T? = null
 
     /**
      * 检查是否符合要求，默认true
